@@ -1,6 +1,6 @@
 
 import { useForm } from "react-hook-form"
-import { toast } from "react-toastify"
+import { ToastContainer ,toast } from "react-toastify"
 
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -11,6 +11,7 @@ import { StyledForm } from "../../styles/form"
 import { FormContainer } from "../RegisterForm/style"
 import { Button } from "../../styles/button"
 import { ErrorMsg } from "../../styles/error"
+import "react-toastify/dist/ReactToastify.css"
 
 
 export const RegisterForm = () =>{
@@ -45,15 +46,19 @@ export const RegisterForm = () =>{
         resolver: yupResolver(registerSchema),
 })
 
-    const registerNewUser = async (registerData) => {
-        console.log(registerData)
+    const registerNewUser = async (data) => {
+        console.log(data)
     try{
-        const response = await api.post("users", registerData)
+        const response = await api.post("users", data)
         console.log(response.data)
         navigate("/")
-        toast.success("Conta criada com sucesso!")
+        toast.success("Conta criada com sucesso!", {
+            className: "successToast"
+        })
     } catch (error) {
-        toast.error("Ops, algo deu errado!")
+        toast.error("Ops, algo deu errado!", {
+            className: "errorToast"
+        })
         console.error(error)
     }
 }
@@ -101,6 +106,10 @@ export const RegisterForm = () =>{
                 <Button type="submit" className="buttonPink">Cadastrar</Button>
         
             </StyledForm>
+
+            <>
+                <ToastContainer/>
+            </>
         </FormContainer>
     )
 }

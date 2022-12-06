@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const RegisterHeader = styled.header`
     width: 100%;
     max-width: 350px;
@@ -42,6 +41,10 @@ export const FormContainer = styled.div`
 
     .buttonPink:hover{
         background-color: var(--color-primary-focus);
+    }
+
+    .errorToast{
+        background-color: var(--grey-2);
     }
 
 `

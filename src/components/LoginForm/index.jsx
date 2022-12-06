@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { toast } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 
 import * as yup from "yup"
 import {yupResolver} from "@hookform/resolvers/yup"
@@ -7,9 +7,11 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import { useNavigate } from "react-router-dom"
 import { api } from "../../services/api"
 
+import "react-toastify/dist/ReactToastify.css"
 import { Button } from "../../styles/button"
 import { StyledForm } from "../../styles/form"
 import { FormContainer } from "./style"
+import { ErrorMsg } from "../../styles/error"
 
 export const LoginForm = () =>{
     const loginSchema = yup.object().shape({
@@ -33,7 +35,7 @@ export const LoginForm = () =>{
 
         } catch (error) {
             console.error(error)
-            toast.error("Algo deu errado")
+            toast.error("Ops, algo deu errado!")
         }
     }
    
@@ -44,11 +46,11 @@ export const LoginForm = () =>{
                     
                     <label htmlFor="email">Email</label>
                     <input id="email" type="email" placeholder = "Digite seu email" {...register("email")} />
-                    {errors.email?.message && <span>{errors.email.message}</span>}
+                    {errors.email?.message && <ErrorMsg>{errors.email.message}</ErrorMsg>}
 
                     <label htmlFor="password">Senha</label>
                     <input id="password" type="password" placeholder = "Digite sua senha" {...register("password")} />
-                    {errors.password?.message && <span>{errors.password.message}</span>}
+                    {errors.password?.message && <ErrorMsg>{errors.password.message}</ErrorMsg>}
 
                     <Button type="submit" className="buttonPink">Entrar</Button>
 
@@ -59,6 +61,9 @@ export const LoginForm = () =>{
                 <Button className="buttonGrey" onClick={() => navigate("/register")} type="button">Cadastre-se</Button>
             </div>
             
+            <>
+                <ToastContainer/>
+            </>
         </FormContainer>
     )
 }

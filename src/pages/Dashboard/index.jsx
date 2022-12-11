@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../styles/button"
 import { Container } from "../../styles/container"
 import { DashBoardHeader, DashboardModules, DashboardUserInfo } from "./style"
-import { RegisterTech } from "../../components/Modal";
+import { RegisterTech } from "../../components/Modal/RegisterTech";
+import { EditTech } from "../../components/Modal/EditTech";
 
 export const Dashboard = () => {
-    const [userInfo, setUserInfo] = useState([])
+    const [userInfo, setUserInfo] = useState({})
     const [registerTech, setRegisterTech] = useState(false)
     const [editTech, setEditTech] = useState(false)
     const [techInfo, setTechInfo] = useState({})
@@ -29,7 +30,7 @@ export const Dashboard = () => {
                 console.log(error)
             }
         })()
-    }, [registerTech, editTech])
+    }, [])
 
 
     const logOut = () => {
@@ -41,7 +42,7 @@ export const Dashboard = () => {
     return (
       <Container>
         {registerTech && <RegisterTech setRegisterTech={setRegisterTech}/>}
-        {/* {editTech && <EditTech techInfo={techInfo} setEditTech={setEditTech}/>} */}
+        {editTech && <EditTech techInfo={techInfo} setEditTech={setEditTech}/>}
 
          <DashBoardHeader>
             <div>
@@ -64,7 +65,7 @@ export const Dashboard = () => {
             </DashboardModules>
             
             <ul>
-                {techInfo.techs?.map((cards) =>(
+                {userInfo.techs?.map((cards) =>(
                     <li id={cards.id} key={cards.id} onClick={() => {
                         setTechInfo(cards) 
                         setEditTech(true)}}>

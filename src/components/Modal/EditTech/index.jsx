@@ -13,16 +13,27 @@ export const EditTech = ({techInfo, setEditTech}) => {
     const [editTitle, setEditTitle] = useState(techInfo.title)
     const [editStatus, setEditStatus] = useState(techInfo.status)
 
-    const {register, handleSubmit} = useForm()
+    
+    const {register, handleSubmit} = useForm({
+        defaultValues:
+        {
+            title: editTitle,
+            status: editStatus
+        }
+    })
 
-    const handleForm = (newData) =>{
-        const editedTech = {status: newData.status}
+    const handleForm = (data) =>{
+        const editedTech = { 
+            title: data.title,
+            status: data.status }
         updateTech(editedTech)
     }
 
+
     const updateTech = async (data) => {
+
         try {
-            const response = await api.put(`users/tech/${techInfo.id}`, data, {
+            const response = await api.put(`users/techs/${techInfo.id}`, data, {
                 headers: {authorization : `Bearer ${token}`}
             })
             
@@ -41,7 +52,7 @@ export const EditTech = ({techInfo, setEditTech}) => {
             const response = await api.delete(`users/techs/${techInfo.id}`, {
                 headers: {authorization : `Bearer ${token}`}
             })
-                toast.success("Tecnologia exluicda com sucesso!")
+                toast.success("Tecnologia excluida com sucesso!")
                 setEditTech(false)
         } catch (error) {
             console.error(error)
@@ -78,11 +89,12 @@ export const EditTech = ({techInfo, setEditTech}) => {
                 </header>
 
                 <StyledForm onSubmit={handleSubmit(handleForm)}>
+
                     <label htmlFor="title">Nome do Projeto</label>
-                    <input id="title" type="text" value={editTitle} {...register("title")} />
+                    <input id="title" type="text" {...register("title") } />
 
                     <label htmlFor="status"></label>
-                    <select value={editStatus} {...register("status")}>
+                    <select {...register("status")}>
                         <option value="Iniciante">Iniciante</option>
                         <option value="Intermediário">Intermediário</option>
                         <option value="Avançado">Avançado</option>

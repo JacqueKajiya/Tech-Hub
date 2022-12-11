@@ -1,22 +1,20 @@
 
 import { useForm } from "react-hook-form"
-import { ToastContainer ,toast } from "react-toastify"
 
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { api } from "../../services/api"
-import { useNavigate } from "react-router-dom"
 
 import { StyledForm } from "../../styles/form"
 import { FormContainer } from "../RegisterForm/style"
 import { Button } from "../../styles/button"
 import { ErrorMsg } from "../../styles/error"
 import "react-toastify/dist/ReactToastify.css"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
 
 
 export const RegisterForm = () =>{
-
-    const navigate = useNavigate()
+    const { registerNewUser } = useContext(UserContext)
 
     const registerSchema = yup.object().shape({
         name: yup.string()
@@ -45,23 +43,6 @@ export const RegisterForm = () =>{
     const {register, handleSubmit, formState: { errors }, } = useForm({
         resolver: yupResolver(registerSchema),
 })
-
-    const registerNewUser = async (data) => {
-        console.log(data)
-    try{
-        const response = await api.post("users", data)
-        console.log(response.data)
-        navigate("/")
-        toast.success("Conta criada com sucesso!", {
-            className: "successToast"
-        })
-    } catch (error) {
-        toast.error("Ops, algo deu errado!", {
-            className: "errorToast"
-        })
-        console.error(error)
-    }
-}
 
     return(
         <FormContainer>
@@ -107,9 +88,6 @@ export const RegisterForm = () =>{
         
             </StyledForm>
 
-            <>
-                <ToastContainer/>
-            </>
         </FormContainer>
     )
 }

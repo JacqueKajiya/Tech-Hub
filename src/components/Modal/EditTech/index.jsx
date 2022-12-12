@@ -1,63 +1,25 @@
+import { useContext } from "react"
 import { useRef, useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 
-import { toast } from "react-toastify"
-import { api } from "../../../services/api"
+import { DashboardContext } from "../../../contexts/DashboardContext"
+import { TechContext } from "../../../contexts/TechContext"
 import { StyledForm } from "../../../styles/form"
 
 import { ModalBox, ModalWrapper } from "../RegisterTech/style"
 
-export const EditTech = ({techInfo, setEditTech}) => {
-    const token = localStorage.getItem("Token")
+export const EditTech = () => {
+    const { setEditTech, techInfo } = useContext(DashboardContext)
+    const { updateTech, deleteTech } = useContext(TechContext)
 
     const [editTitle, setEditTitle] = useState(techInfo.title)
     const [editStatus, setEditStatus] = useState(techInfo.status)
 
-    
-    const {register, handleSubmit} = useForm({
-        defaultValues:
-        {
-            title: editTitle,
-            status: editStatus
-        }
-    })
+    const {register, handleSubmit} = useForm()
 
-    const handleForm = (data) =>{
-        const editedTech = { 
-            title: data.title,
-            status: data.status }
+    const handleForm = (newData) =>{
+        const editedTech = {status: newData.status}
         updateTech(editedTech)
-    }
-
-
-    const updateTech = async (data) => {
-
-        try {
-            const response = await api.put(`users/techs/${techInfo.id}`, data, {
-                headers: {authorization : `Bearer ${token}`}
-            })
-            
-            toast.success("Tecnologia atualizada!")
-
-            setEditTech(false)
-
-        } catch (error) {
-            console.error(error)
-            toast.error("Ops, algo deu errado!")
-        }
-    }
-
-    const deleteTech = async () => {
-        try {
-            const response = await api.delete(`users/techs/${techInfo.id}`, {
-                headers: {authorization : `Bearer ${token}`}
-            })
-                toast.success("Tecnologia excluida com sucesso!")
-                setEditTech(false)
-        } catch (error) {
-            console.error(error)
-            toast.error("Ops, algo deu errado!")
-        }
     }
 
     const modalRef = useRef(null)
@@ -89,12 +51,11 @@ export const EditTech = ({techInfo, setEditTech}) => {
                 </header>
 
                 <StyledForm onSubmit={handleSubmit(handleForm)}>
-
                     <label htmlFor="title">Nome do Projeto</label>
-                    <input id="title" type="text" {...register("title") } />
+                    <input id="title" type="text" value={editTitle} {...register("title")} />
 
                     <label htmlFor="status"></label>
-                    <select {...register("status")}>
+                    <select value={editStatus} {...register("status")}>
                         <option value="Iniciante">Iniciante</option>
                         <option value="Intermediário">Intermediário</option>
                         <option value="Avançado">Avançado</option>

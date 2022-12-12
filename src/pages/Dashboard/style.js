@@ -66,7 +66,7 @@ export const DashboardUserInfo = styled.section`
 `
 
 export const DashboardModules = styled.section`
-    display: none;
+    display: flex;
     flex-direction: column;
     line-height: 2.5rem;
 
@@ -83,7 +83,6 @@ export const DashboardModules = styled.section`
 
     @media(min-width: 400px){
         width: 100%;
-        display: flex;
         margin: 0 auto;
 
     }

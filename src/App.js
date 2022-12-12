@@ -1,7 +1,9 @@
 import Global from "./styles/global";
 import { RoutesMain } from "./routes";
-import { UserProvider } from "./contexts/UserContext";
 import { ToastContainer } from "react-toastify";
+import { UserProvider } from "./contexts/UserContext";
+import { DashboardProvider } from "./contexts/DashboardContext";
+import { TechProvider } from "./contexts/TechContext";
 
 function App() {
   return (
@@ -9,11 +11,14 @@ function App() {
       <Global />
 
         <UserProvider>
-            <RoutesMain/>
+          <DashboardProvider>
+            <TechProvider>
+              <RoutesMain/>
+            </TechProvider>
+          </DashboardProvider>
         </UserProvider>
 
         <ToastContainer>
-          
         </ToastContainer>
     </>
   );

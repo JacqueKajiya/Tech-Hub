@@ -1,5 +1,5 @@
 import { api } from "../../services/api"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom";
 
 import { Button } from "../../styles/button"
@@ -7,15 +7,15 @@ import { Container } from "../../styles/container"
 import { DashBoardHeader, DashboardModules, DashboardUserInfo } from "./style"
 import { RegisterTech } from "../../components/Modal/RegisterTech";
 import { EditTech } from "../../components/Modal/EditTech";
+import { useContext } from "react";
+import { DashboardContext } from "../../contexts/DashboardContext";
+import { TechCard } from "../../components/TechCard";
 
 export const Dashboard = () => {
-    const [userInfo, setUserInfo] = useState({})
-    const [registerTech, setRegisterTech] = useState(false)
-    const [editTech, setEditTech] = useState(false)
-    const [techInfo, setTechInfo] = useState({})
+
+    const { setEditTech, editTech, techInfo, setTechInfo, userInfo, setUserInfo, registerTech, setRegisterTech} = useContext(DashboardContext)
 
     const navigate = useNavigate()
-    
 
     const userId = localStorage.getItem("UserId")
 
@@ -30,7 +30,7 @@ export const Dashboard = () => {
                 console.log(error)
             }
         })()
-    }, [registerTech, editTech])
+    }, [])
 
 
     const logOut = () => {
@@ -60,21 +60,20 @@ export const Dashboard = () => {
             </DashboardUserInfo>
 
             <DashboardModules>
-                <h3>Tecnologias</h3>
-                <button onClick={() => setRegisterTech(true)}>+</button>
-            </DashboardModules>
-            
-            <ul>
-                {userInfo.techs?.map((cards) =>(
-                    <li id={cards.id} key={cards.id} onClick={() => {
-                        setTechInfo(cards) 
-                        setEditTech(true)}}>
+                <section>
+                    <h3>Tecnologias</h3>
+                    <button onClick={() => setRegisterTech(true)}>+</button>
+                </section>
 
-                        <span>{cards.title}</span>
-                        <small>{cards.status}</small>
-                    </li>
+                <ul>
+                {userInfo.techs?.map((cards) =>(
+                    <TechCard key={cards.id} id={cards.id} cards={cards} setTechInfo={setTechInfo} setEditTech={setEditTech}/>
                 ))}
             </ul>
+
+            </DashboardModules>
+            
+            
 
          </main>
 

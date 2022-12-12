@@ -33,6 +33,7 @@ export default createGlobalStyle`
     }
 
     body, html{
+        font-family: "Inter", sans-serif;
         width: 100vw;
         height: 100vh;
     }

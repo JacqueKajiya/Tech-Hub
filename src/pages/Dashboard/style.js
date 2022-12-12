@@ -66,8 +66,6 @@ export const DashboardUserInfo = styled.section`
 `
 
 export const DashboardModules = styled.section`
-    display: flex;
-    flex-direction: column;
     line-height: 2.5rem;
 
     padding: 2rem 0;
@@ -90,4 +88,46 @@ export const DashboardModules = styled.section`
     @media(min-width: 690px){
         width: 60%;
     }
+`
+
+export const TechHeader = styled.section`
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-1);
+
+    button{
+        color: var(--grey-0);
+        font-weight: 600;
+        font-size: var(--font-1);
+        font-weight: 600;
+
+        height: 2rem;
+        width: 2rem;
+        background-color: var(--grey-3);
+        border: transparent;
+        border-radius: var(--radius-2);
+
+        transition: 0.2s ease;
+    }
+
+    button:hover{
+        background-color: var(--grey-2);
+    }
+`
+
+export const TechCardList = styled.ul`
+    width: 100%;
+    height: fit-content;
+    max-height: 400px;
+    background-color: var(--grey-3);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: var(--radius-2);
+    overflow: auto;
+
 `

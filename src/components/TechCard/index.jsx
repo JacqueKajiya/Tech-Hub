@@ -1,11 +1,14 @@
+import { TechItem } from "./style"
+
 export const TechCard = ({cards, setTechInfo, setEditTech}) => {
     return(
-        <li id={cards.id} onClick={() => {
+        <TechItem onClick={() => {
             setTechInfo(cards) 
             setEditTech(true)}}>
 
             <span>{cards.title}</span>
             <small>{cards.status}</small>
-        </li>
+
+        </TechItem>
     )
 }

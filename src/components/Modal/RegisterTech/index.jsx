@@ -6,9 +6,8 @@ import { toast } from "react-toastify"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
-import { StyledForm } from "../../../styles/form"
 import { ErrorMsg } from "../../../styles/error"
-import { ModalBox, ModalWrapper } from "./style"
+import { ModalBox, ModalForm, ModalHeader, ModalWrapper } from "../../../styles/modal"
 
 export const RegisterTech = ({ setRegisterTech }) =>{
     const token = localStorage.getItem("Token")
@@ -65,12 +64,12 @@ export const RegisterTech = ({ setRegisterTech }) =>{
     return(
         <ModalWrapper>
             <ModalBox ref={modalRef}>
-                <header>
+                <ModalHeader>
                     <h3>Cadastrar Tecnologia</h3>
                     <button type="button" onClick={() => setRegisterTech(false)}> X </button>
-                </header>
+                </ModalHeader>
                 
-                <StyledForm onSubmit={handleSubmit(handleTechForm)}>
+                <ModalForm onSubmit={handleSubmit(handleTechForm)}>
                 
                     <label htmlFor="name">Nome</label>
                     <input id="name" type="text" {...register("title")} />
@@ -85,7 +84,7 @@ export const RegisterTech = ({ setRegisterTech }) =>{
                     {errors.status?.message && <ErrorMsg>{errors.status.message}</ErrorMsg>}
                 
                 <button type="submit">Cadastrar Tecnologia</button>
-                </StyledForm>
+                </ModalForm>
             </ModalBox>
         </ModalWrapper>
     )    

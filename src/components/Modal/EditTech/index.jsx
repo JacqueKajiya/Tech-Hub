@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form"
 
 import { DashboardContext } from "../../../contexts/DashboardContext"
 import { TechContext } from "../../../contexts/TechContext"
-import { StyledForm } from "../../../styles/form"
 
-import { ModalBox, ModalWrapper } from "../RegisterTech/style"
+import { ModalBox, ModalForm, ModalHeader, ModalWrapper } from "../../../styles/modal"
+import { ModalEditButtons } from "./style"
 
 export const EditTech = () => {
     const { setEditTech, techInfo } = useContext(DashboardContext)
@@ -45,28 +45,28 @@ export const EditTech = () => {
     return(
         <ModalWrapper>
             <ModalBox ref={modalRef}>
-                <header>
+                <ModalHeader>
                     <h2>Tecnologia Detalhes</h2>
                     <button type="button" onClick={() => setEditTech(false)}>X </button>
-                </header>
+                </ModalHeader>
 
-                <StyledForm onSubmit={handleSubmit(handleForm)}>
+                <ModalForm onSubmit={handleSubmit(handleForm)}>
                     <label htmlFor="title">Nome do Projeto</label>
                     <input id="title" type="text" value={editTitle} {...register("title")} />
 
-                    <label htmlFor="status"></label>
+                    <label htmlFor="status">Status</label>
                     <select value={editStatus} {...register("status")}>
                         <option value="Iniciante">Iniciante</option>
                         <option value="Intermediário">Intermediário</option>
                         <option value="Avançado">Avançado</option>
                     </select>
 
-                    <div>
-                        <button type="submit">Salvar alterações</button>
-                        <button type="button" onClick={() => deleteTech()}>Excluir</button>
-                    </div>
+                    <ModalEditButtons>
+                        <button class="saveButton" type="submit">Salvar alterações</button>
+                        <button class="deleteButton" type="button" onClick={() => deleteTech()}>Excluir</button>
+                    </ModalEditButtons>
 
-                </StyledForm>
+                </ModalForm>
             
 
             </ModalBox>

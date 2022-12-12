@@ -1,15 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { api } from "../../services/api"
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom";
+
+import { EditTech } from "../../components/Modal/EditTech";
+import { RegisterTech } from "../../components/Modal/RegisterTech";
+import { DashboardContext } from "../../contexts/DashboardContext";
+import { TechCard } from "../../components/TechCard";
 
 import { Button } from "../../styles/button"
 import { Container } from "../../styles/container"
-import { DashBoardHeader, DashboardModules, DashboardUserInfo } from "./style"
-import { RegisterTech } from "../../components/Modal/RegisterTech";
-import { EditTech } from "../../components/Modal/EditTech";
-import { useContext } from "react";
-import { DashboardContext } from "../../contexts/DashboardContext";
-import { TechCard } from "../../components/TechCard";
+import { DashBoardHeader, DashboardModules, DashboardUserInfo, TechCardList, TechHeader } from "./style"
 
 export const Dashboard = () => {
 
@@ -60,16 +61,16 @@ export const Dashboard = () => {
             </DashboardUserInfo>
 
             <DashboardModules>
-                <section>
+                <TechHeader>
                     <h3>Tecnologias</h3>
                     <button onClick={() => setRegisterTech(true)}>+</button>
-                </section>
+                </TechHeader>
 
-                <ul>
-                {userInfo.techs?.map((cards) =>(
-                    <TechCard key={cards.id} id={cards.id} cards={cards} setTechInfo={setTechInfo} setEditTech={setEditTech}/>
-                ))}
-            </ul>
+                <TechCardList>
+                    {userInfo.techs?.map((cards) =>(
+                        <TechCard key={cards.id} id={cards.id} cards={cards} setTechInfo={setTechInfo} setEditTech={setEditTech}/>
+                    ))}
+                </TechCardList>
 
             </DashboardModules>
             

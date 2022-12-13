@@ -15,10 +15,18 @@ export const EditTech = () => {
     const [editTitle, setEditTitle] = useState(techInfo.title)
     const [editStatus, setEditStatus] = useState(techInfo.status)
 
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit} = useForm({
+        defaultValues:{
+            title: techInfo.title,
+            status: techInfo.status
+        }
+    })
 
-    const handleForm = (newData) =>{
-        const editedTech = {status: newData.status}
+    const handleForm = (data) =>{
+        const editedTech = {
+            title: data.title,
+            status: data.status
+        }
         updateTech(editedTech)
     }
 
@@ -52,7 +60,7 @@ export const EditTech = () => {
 
                 <ModalForm onSubmit={handleSubmit(handleForm)}>
                     <label htmlFor="title">Nome do Projeto</label>
-                    <input id="title" type="text" value={editTitle} {...register("title")} />
+                    <input id="title" type="text" {...register("title")} />
 
                     <label htmlFor="status">Status</label>
                     <select value={editStatus} {...register("status")}>

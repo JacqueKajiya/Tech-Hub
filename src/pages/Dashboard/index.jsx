@@ -31,7 +31,7 @@ export const Dashboard = () => {
                 console.log(error)
             }
         })()
-    }, [])
+    }, [editTech, registerTech])
 
 
     const logOut = () => {

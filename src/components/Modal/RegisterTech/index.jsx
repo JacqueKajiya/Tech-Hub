@@ -8,8 +8,13 @@ import { yupResolver } from "@hookform/resolvers/yup"
 
 import { ErrorMsg } from "../../../styles/error"
 import { ModalBox, ModalForm, ModalHeader, ModalWrapper } from "../../../styles/modal"
+import { useContext } from "react"
+import { DashboardContext } from "../../../contexts/DashboardContext"
 
 export const RegisterTech = ({ setRegisterTech }) =>{
+
+    const { setTechInfo } = useContext(DashboardContext)
+
     const token = localStorage.getItem("Token")
 
     const techSchema = yup.object().shape({
@@ -33,6 +38,7 @@ export const RegisterTech = ({ setRegisterTech }) =>{
             })
 
             toast.success("Tecnologia cadastrada!")
+            
             setRegisterTech(false)
 
         }catch(error){

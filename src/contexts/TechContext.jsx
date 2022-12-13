@@ -21,7 +21,6 @@ export const TechProvider = ({ children }) =>{
             })
             
             toast.success("Tecnologia atualizada!")
-
             setEditTech(false)
 
         } catch (error) {

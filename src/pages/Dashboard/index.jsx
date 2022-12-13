@@ -14,7 +14,7 @@ import { DashBoardHeader, DashboardModules, DashboardUserInfo, TechCardList, Tec
 
 export const Dashboard = () => {
 
-    const { setEditTech, editTech, techInfo, setTechInfo, userInfo, setUserInfo, registerTech, setRegisterTech} = useContext(DashboardContext)
+    const { setEditTech, editTech, setTechInfo, userInfo, setUserInfo, registerTech, setRegisterTech} = useContext(DashboardContext)
 
     const navigate = useNavigate()
 

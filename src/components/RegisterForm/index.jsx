@@ -1,5 +1,7 @@
 
 import { useForm } from "react-hook-form"
+import { useContext } from "react"
+import { UserContext } from "../../contexts/UserContext"
 
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -9,8 +11,6 @@ import { FormContainer } from "../RegisterForm/style"
 import { Button } from "../../styles/button"
 import { ErrorMsg } from "../../styles/error"
 import "react-toastify/dist/ReactToastify.css"
-import { useContext } from "react"
-import { UserContext } from "../../contexts/UserContext"
 
 
 export const RegisterForm = () =>{

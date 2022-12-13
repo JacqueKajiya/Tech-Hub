@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
 
@@ -8,11 +8,14 @@ export const UserContext = createContext ({})
 export const UserProvider = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [userData, setUserData] = useState(null)
+
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const token = localStorage.getItem("Token")
 
     useEffect(() => {
         async function loadUser() {
-            const token = localStorage.getItem("Token")
 
             if(!token){
                 setLoading(false)
@@ -20,11 +23,8 @@ export const UserProvider = ({ children }) => {
             }
 
             try{
-                const response = await api.get("profile", {
-                    headers: {
-                        authorization: `Bearer ${token}`
-                    }
-                })
+                api.defaults.headers.common.authorization = `Bearer ${token}`
+                const response = await api.get("profile")
 
                 setUserData(response.data)
 
@@ -50,7 +50,11 @@ export const UserProvider = ({ children }) => {
                 toast.success("Usuário logado")
                 setUserData(response.data.user)
 
-                navigate("/dashboard")
+                api.defaults.headers.common.authorization = `Bearer ${token}`
+
+                const toNavigate = location.state?.from?.pathname || "/dashboard"
+
+                navigate(toNavigate, { replace : true })
 
         } catch (error) {
             console.error(error)

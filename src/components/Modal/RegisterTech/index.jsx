@@ -11,9 +11,9 @@ import { ModalBox, ModalForm, ModalHeader, ModalWrapper } from "../../../styles/
 import { useContext } from "react"
 import { DashboardContext } from "../../../contexts/DashboardContext"
 
-export const RegisterTech = ({ setRegisterTech }) =>{
+export const RegisterTech = () =>{
 
-    const { setTechInfo } = useContext(DashboardContext)
+    const { setRegisterTech } = useContext(DashboardContext)
 
     const token = localStorage.getItem("Token")
 

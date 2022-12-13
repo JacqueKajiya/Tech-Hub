@@ -42,8 +42,8 @@ export const Dashboard = () => {
 
     return (
       <Container>
-        {registerTech && <RegisterTech setRegisterTech={setRegisterTech}/>}
-        {editTech && <EditTech techInfo={techInfo} setEditTech={setEditTech}/>}
+        {registerTech && <RegisterTech />}
+        {editTech && <EditTech />}
 
          <DashBoardHeader>
             <div>

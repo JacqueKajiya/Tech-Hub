@@ -12,20 +12,18 @@ export const EditTech = () => {
     const { setEditTech, techInfo } = useContext(DashboardContext)
     const { updateTech, deleteTech } = useContext(TechContext)
 
-    const [editTitle, setEditTitle] = useState(techInfo.title)
     const [editStatus, setEditStatus] = useState(techInfo.status)
 
     const {register, handleSubmit} = useForm({
         defaultValues:{
             title: techInfo.title,
-            status: techInfo.status
+            status: editStatus
         }
     })
 
-    const handleForm = (data) =>{
+    const handleForm = (newData) =>{
         const editedTech = {
-            title: data.title,
-            status: data.status
+            status: newData.status
         }
         updateTech(editedTech)
     }
@@ -63,7 +61,7 @@ export const EditTech = () => {
                     <input id="title" type="text" {...register("title")} />
 
                     <label htmlFor="status">Status</label>
-                    <select value={editStatus} {...register("status")}>
+                    <select {...register("status")}>
                         <option value="Iniciante">Iniciante</option>
                         <option value="Intermediário">Intermediário</option>
                         <option value="Avançado">Avançado</option>

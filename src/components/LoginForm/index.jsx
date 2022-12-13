@@ -23,6 +23,7 @@ export const LoginForm = () =>{
     })
 
     const {register, handleSubmit, formState: { errors } } = useForm({
+        mode: "onBlur",
         resolver: yupResolver(loginSchema),
     })
 

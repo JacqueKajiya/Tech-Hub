@@ -41,6 +41,7 @@ export const RegisterForm = () =>{
 })
 
     const {register, handleSubmit, formState: { errors }, } = useForm({
+        mode: "onBlur",
         resolver: yupResolver(registerSchema),
 })
 

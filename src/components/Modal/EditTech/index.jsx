@@ -16,7 +16,6 @@ export const EditTech = () => {
 
     const {register, handleSubmit} = useForm({
         defaultValues:{
-            title: techInfo.title,
             status: editStatus
         }
     })
@@ -58,7 +57,7 @@ export const EditTech = () => {
 
                 <ModalForm onSubmit={handleSubmit(handleForm)}>
                     <label htmlFor="title">Nome do Projeto</label>
-                    <input id="title" type="text" {...register("title")} />
+                    <input id="title" type="text" value={techInfo.title} {...register("title")} />
 
                     <label htmlFor="status">Status</label>
                     <select {...register("status")}>

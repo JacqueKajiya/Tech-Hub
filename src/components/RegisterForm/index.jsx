@@ -49,7 +49,7 @@ export const RegisterForm = () =>{
             <h2>Crie sua conta</h2>
             <small>Rápido e grátis, vamos nessa</small>
 
-            <StyledForm onSubmit={ handleSubmit(registerNewUser) }>
+            <StyledForm onSubmit={ handleSubmit(registerNewUser)} noValidate>
                 
                 <label htmlFor="name">Nome</label>
                 <input id="name" type="text" placeholder = "Digite aqui seu nome" {...register("name")} />

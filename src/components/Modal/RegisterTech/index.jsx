@@ -75,7 +75,7 @@ export const RegisterTech = () =>{
                     <button type="button" onClick={() => setRegisterTech(false)}> X </button>
                 </ModalHeader>
                 
-                <ModalForm onSubmit={handleSubmit(handleTechForm)}>
+                <ModalForm onSubmit={handleSubmit(handleTechForm)} noValidate>
                 
                     <label htmlFor="name">Nome</label>
                     <input id="name" type="text" {...register("title")} />

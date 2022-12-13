@@ -30,7 +30,7 @@ export const LoginForm = () =>{
     return(
         <FormContainer>
             <h1>Login</h1>
-            <StyledForm onSubmit={ handleSubmit (userLogin)}>
+            <StyledForm onSubmit={ handleSubmit (userLogin)} noValidate>
                     
                     <label htmlFor="email">Email</label>
                     <input id="email" type="email" placeholder = "Digite seu email" {...register("email")} />
